@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post {{title}}</title>
+</head>
+<body>
+	<h1> This is the Post {{title}} page</h1>
+
+	{% for object in object_list %}
+		<a href="{% url 'detail' post_id=object.id %}">{{object.title}}</a><br>
+		{{object.content}}<br>
+		{{object.timestamp}}<br>
+		{{object.updated}}<br>
+		{{object.id}}<br>
+		<br>
+	{% endfor %}
+
+</body>
+</html>
