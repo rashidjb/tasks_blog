@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post Detail</title>
-</head>
-<body>
-    <h1>The Post {{title}} Page</h1>
+{% extends "base.html" %}
+	{% block content %}
 
-    {{instance.title}} <br>
-    {{instance.content}} <br>
-    {{instance.timestamp}} <br>
-    {{instance.updated}} <br>
-    {{instance.id}} <br>
-</body>
-</html>
+	    {{instance.title}} <br>
+	    {% if instance.image %}
+			<img src="{{instance.image.url}}" alt="nothing"><br>
+		{% endif%}
+	    {{instance.content}} <br>
+	    {{instance.timestamp}} <br>
+	    {{instance.updated}} <br>
+	    {{instance.id}} <br>
+	    
+
+		<a href="{% url 'posts:list' %}">Back to list</a>
+
+	{% endblock content %}

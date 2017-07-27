@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Post {{title}}</title>
-</head>
-<body>
-	<h1> This is the Post {{title}} page</h1>
+{% extends "base.html" %}
 
-</body>
-</html>
+	{% block content %}
+		<form action="{% url 'posts:create' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="Create Post">
+		</form>
+	{% endblock content %}
