@@ -1,16 +1,40 @@
 {% extends "base.html" %}
+{% load urlify %}
 	{% block content %}
 
-	    {{instance.title}} <br>
-	    {% if instance.image %}
-			<img src="{{instance.image.url}}" alt="nothing"><br>
-		{% endif%}
-	    {{instance.content}} <br>
-	    {{instance.timestamp}} <br>
-	    {{instance.updated}} <br>
-	    {{instance.id}} <br>
-	    
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="thumbnail">
+					{% if instance.image %}
+						<img src="{{instance.image.url}}" alt="nothing">
+					{% endif %}
+				  <div class="caption">
+					<h3>{{instance.title}}</h3>
+					<p>{{instance.content|linebreaks}}</p>
+					<p>Last edited: {{instance.updated|timesince}} ago</p>
+					<p>Created: {{instance.timestamp|timesince}} ago</p>
+					<a href="{% url 'posts:list' %}" class="btn btn-default" role="button">Back to list</a>
+					<a href="{% url 'posts:update' post_id=instance.id %}" class="btn btn-warning" role="button">Edit</a>
+					<a href="{% url 'posts:delete' post_id=instance.id %}" class="btn btn-danger" role="button">Delete</a>
 
-		<a href="{% url 'posts:list' %}">Back to list</a>
+
+					<p><a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">Share on Facebook</a></p>
+
+			        <p><a href="https://twitter.com/home?status={{instance.content|truncatechars:35|urlify}}%20{{request.build_absolute_uri}}">Share on Twitter</a></p>
+
+			        <p><a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
+			        Share on Linkedin
+			        </a></p>
+
+				  </div>
+				</div>
+			</div>
+		</div>
+
+
+
 
 	{% endblock content %}
+
+
+	
