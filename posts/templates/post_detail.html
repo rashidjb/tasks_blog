@@ -12,12 +12,16 @@
 					<h3>{{instance.title}}</h3>
 					<p>{{instance.content|linebreaks}}</p>
 					<p>Last edited: {{instance.updated|timesince}} ago</p>
+					<p>Published: {{instance.publish|timesince}} ago</p>
 					<p>Created: {{instance.timestamp|timesince}} ago</p>
+					<p>Author: {{instance.author}}</p>
+
 					<a href="{% url 'posts:list' %}" class="btn btn-default" role="button">Back to list</a>
-					<a href="{% url 'posts:update' post_id=instance.id %}" class="btn btn-warning" role="button">Edit</a>
-					<a href="{% url 'posts:delete' post_id=instance.id %}" class="btn btn-danger" role="button">Delete</a>
-
-
+					<a href="{% url 'posts:update' post_slug=instance.slug %}" class="btn btn-warning" role="button">Edit</a>
+					<a href="{% url 'posts:delete' post_slug=instance.slug %}" class="btn btn-danger" role="button">Delete</a>
+					
+					{% include "likes.html" %}
+	
 					<p><a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">Share on Facebook</a></p>
 
 			        <p><a href="https://twitter.com/home?status={{instance.content|truncatechars:35|urlify}}%20{{request.build_absolute_uri}}">Share on Twitter</a></p>

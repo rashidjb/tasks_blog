@@ -1,5 +1,7 @@
 {% if messages%}
+	<ul>
 	{%for message in messages%}
-		<p>{{message}}</p>
+		<li>{{message}}</li>
 	{% endfor %}
+	</ul>
 {% endif %}
